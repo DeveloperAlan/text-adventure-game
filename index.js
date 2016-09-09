@@ -38,28 +38,6 @@ function askGender() {
     })
 }
 
-
-var Player = {
-    name: "Alan",
-    race: "Human",
-    class: "Mage",
-    gender: "Male",
-    health: 20,
-    skill: {
-        1: null,
-        2: null,
-        3: null
-    },
-    eat: function() {
-        if (Player.health == 19) {
-            health = 20;
-        } else if (Player.health == 20) {
-            console.log("You are on full health. Stop eating.");
-        } else {
-            health = health + 2;
-        }
-    }
-}
 var enemies = {
     finalBoss: {
         name: "Alan",
@@ -92,12 +70,37 @@ var enemies = {
 
 var location = {
     town: {
+        name: "Falador",
         NPC: [],
         Monsters: null
     },
     woods: {
+        name: "The Woods",
         NPC: [],
         Monsters: enemies.finalBoss
+    }
+} 
+
+var Player = {
+    name: "Alan",
+    race: "Human",
+    class: "Mage",
+    gender: "Male",
+    currentLocaton: location.town,
+    health: 20,    
+    skill: {
+        1: null,
+        2: null,
+        3: null
+    },
+    eat: function() {
+        if (Player.health == 19) {
+            health = 20;
+        } else if (Player.health == 20) {
+            console.log("You are on full health. Stop eating.");
+        } else {
+            health = health + 2;
+        }
     }
 }
 
@@ -129,6 +132,7 @@ function chooseClass(answer) {
                 Player.health = Player.health + 10;
             }
         }
+        askGender();
     } else if (Player.class == "Thief") {
         //Player.health = 10;
         Player.skill["2"] = function() {
@@ -139,6 +143,7 @@ function chooseClass(answer) {
             console.log("Eat my arrow");
             finalBoss.health = finalBoss.health - 15;
         }
+        askGender();
     } else if (Player.class == "Warrior") {
         //Player.health = 10;
         Player.skill["2"] = function() {
@@ -150,6 +155,7 @@ function chooseClass(answer) {
         Player.skill["3"] = function() {
             console.log("This skill is a placeholder. It does nothing.");
         }
+        askGender();
     } else {
         readlineThing.question("Please enter a valid class: ", function(answer) {
             chooseClass(answer);
