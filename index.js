@@ -33,7 +33,8 @@ function askClass() {
 function askGender() {
     readlineThing.question("Choose your gender: ", function(answer) {
         gender(answer);
-        readlineThing.close();
+        scroll();
+        // readlineThing.close();
     })
 }
 
@@ -85,7 +86,7 @@ var Player = {
     race: "Human",
     class: "Mage",
     gender: "Male",
-    currentLocaton: location.town,
+    currentLocaton: location.town.name,
     currentEnemy: null,
     health: 20,    
     skill: {
@@ -110,6 +111,14 @@ function Name(answer) {
 
 function gender(answer) {
     Player.gender = answer;
+}
+
+function rollDice() {
+    return Math.floor(Math.random() * 6 + 1);
+    //Math.floor = rounds down to the nearest whole number
+    //Math.random = choose a random number between 0 and 1
+
+    //Math.round
 }
 
 function chooseClass(answer) {
@@ -168,6 +177,51 @@ function wait(ms) {
     for (var end = start; end < start + ms;) {
         end = new Date().getTime();
     }
+}
+
+function scroll() {
+    console.log("The game begins!")
+    wait(1000);
+    console.log("You are " + Player.name + ", a great legend in the world of China");
+    wait(2000);
+    console.log("The government needs you help to fight democracy");
+    wait(2000);
+    console.log("With your power in the knowledge of a " + Player.class + " and your will to save your country, you accept the challenge!");
+    wait(3000);
+    director();
+};
+
+function move() {
+
+}
+
+function director() {
+    var diceThrow = rollDice();
+    if (Player.currentLocation == location.woods.name) {
+        if (diceThrow > 0) {
+            battle();
+        }
+    } else if (Player.currentLocation == location.town.name) {
+        console.log("You are currently in town. Please choose a direction on where you want to go!");
+        playerChoice();
+    }
+}
+
+director();
+
+function battle() {
+
+}
+
+function playerChoice() {
+    //run 
+    //battle
+    //flee
+    //whatever...    
+}
+
+var NPC = {
+
 }
 
 game.start();
