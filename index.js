@@ -86,7 +86,7 @@ var Player = {
     race: "Human",
     class: "Mage",
     gender: "Male",
-    currentLocaton: location.town.name,
+    currentLocation: location.town.name,
     currentEnemy: null,
     health: 20,    
     skill: {
@@ -102,6 +102,19 @@ var Player = {
         } else {
             health = health + 2;
         }
+    }
+}
+
+var NPC = {
+    priest: {
+        heal: function() {
+            //do heal
+        }
+    },
+    vendor: {
+        shop: function() {
+            //do shop
+        }    
     }
 }
 
@@ -196,26 +209,29 @@ function move() {
 }
 
 function director() {
+    console.log(Player);
+    console.log(Player.currentLocation);
     var diceThrow = rollDice();
-    if (Player.currentLocation == location.woods.name) {
+    console.log(diceThrow);
+    if (Player.currentLocation == location.woods.name) {        
         if (diceThrow > 0) {
             battle();
         }
     } else if (Player.currentLocation == location.town.name) {
-        console.log("You are currently in town. Please choose a direction on where you want to go!");
+        console.log("Welcome to the town " + location.town.name + "!");
         playerChoice();
     }
 }
-
-director();
 
 function battle() {
 
 }
 
 function playerChoice() {
+    readlineThing.question("What is your next move?");
     //run 
     //battle
+    //move
     //flee
     //whatever...    
 }
