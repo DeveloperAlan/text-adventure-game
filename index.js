@@ -228,7 +228,9 @@ function battle() {
 }
 
 function playerChoice() {
-    readlineThing.question("What is your next move?");
+    readlineThing.question("What is your next move?\n", function(answer) {
+        if(answer)
+    });
     //run 
     //battle
     //move
